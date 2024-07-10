@@ -3,12 +3,8 @@ using MongoDB.Bson;
 
 namespace TodoApiMongoDB.Models
 {
-    public class TodoItem
+    public class TodoItem : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
         public string Name { get; set; }
         public bool IsComplete { get; set; }
     }

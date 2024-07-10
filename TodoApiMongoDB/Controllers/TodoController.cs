@@ -19,13 +19,13 @@ namespace TodoApiMongoDB.Controllers
         [HttpGet]
         public async Task<ActionResult<List<TodoItem>>> Get()
         {
-            return await _context.TodoItems.Find(todo => true).ToListAsync();
+            return await _context.TodoItems.Find(x => true).ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItem>> Get(string id)
         {
-            var todoItem = await _context.TodoItems.Find(todo => todo.Id == id).FirstOrDefaultAsync();
+            var todoItem = await _context.TodoItems.Find(x => x.Id == id).FirstOrDefaultAsync();
 
             if (todoItem == null)
             {
@@ -46,7 +46,7 @@ namespace TodoApiMongoDB.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, TodoItem updatedTodoItem)
         {
-            var result = await _context.TodoItems.ReplaceOneAsync(todo => todo.Id == id, updatedTodoItem);
+            var result = await _context.TodoItems.ReplaceOneAsync(x => x.Id == id, updatedTodoItem);
 
             if (result.MatchedCount == 0)
             {
@@ -59,7 +59,7 @@ namespace TodoApiMongoDB.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var result = await _context.TodoItems.DeleteOneAsync(todo => todo.Id == id);
+            var result = await _context.TodoItems.DeleteOneAsync(x => x.Id == id);
 
             if (result.DeletedCount == 0)
             {
